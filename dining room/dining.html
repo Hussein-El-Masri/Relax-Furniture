@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dining Rooms Collection - Relax Furniture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap">
+    <style>
+        /* Color Variables - Black and White Theme */
+        :root {
+            --deep-navy: #000000;
+            --champagne-gold: #FFFFFF;
+            --dark-walnut: #333333;
+            --ivory-white: #F5F5F5;
+            --mid-gray: #777777;
+            --light-gray: #DDDDDD;
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--ivory-white);
+            color: var(--deep-navy);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .page-header {
+            position: relative;
+            padding: 10rem 2rem 5rem;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.6)), url('header-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+            transition: color 0.3s ease-in-out;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--champagne-gold);
+            transition: width 0.3s ease;
+        }
+
+        .page-header h1:hover::after {
+            width: 150px;
+        }
+
+        .page-header p {
+            max-width: 750px;
+            margin: 1.5rem auto 0;
+            font-size: 1.3rem;
+            font-weight: 300;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        .background-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .dining-rooms-gallery {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--deep-navy);
+            position: relative;
+        }
+
+        .gallery-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--deep-navy);
+        }
+
+        .gallery-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            color: var(--dark-walnut);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--deep-navy);
+            background: transparent;
+            color: var(--deep-navy);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--deep-navy);
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards;
+            animation-delay: calc(var(--item-index) * 0.1s);
+            border: 1px solid transparent;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border: 1px solid var(--deep-navy);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--deep-navy);
+            color: var(--champagne-gold);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 2;
+        }
+
+        .gallery-item-preview {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-item-preview {
+            transform: translateY(0);
+        }
+
+        .gallery-item-preview h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--deep-navy);
+            margin-bottom: 0.3rem;
+            font-size: 1.3rem;
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7), transparent);
+            overflow: hidden;
+            width: 100%;
+            height: 0;
+            transition: 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            height: 100%;
+        }
+
+        .overlay-content {
+            color: var(--ivory-white);
+            text-align: center;
+            padding: 2rem;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.5s ease 0.1s;
+        }
+
+        .gallery-item:hover .overlay-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .overlay-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .overlay-content p {
+            font-size: 1.1rem;
+            max-width: 300px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+
+        .view-details-btn {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background-color: var(--champagne-gold);
+            color: var(--deep-navy);
+            border: 1px solid var(--champagne-gold);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .view-details-btn:hover {
+            background-color: transparent;
+            color: var(--champagne-gold);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--deep-navy);
+            color: var(--ivory-white);
+            padding: 4rem 3rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--champagne-gold);
+            margin-bottom: 1rem;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--champagne-gold);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column ul li a {
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--champagne-gold);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--champagne-gold);
+            color: var(--deep-navy);
+        }
+
+        .location {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .location a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--ivory-white);
+            transition: color 0.3s ease;
+        }
+
+        .location a:hover {
+            color: var(--champagne-gold);
+        }
+
+        .location i {
+            font-size: 1.5rem;
+            color: var(--champagne-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .page-header {
+                padding: 7rem 1rem 4rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body class="background-pattern">
+    <header class="page-header">
+        <h1>Dining Rooms Collection</h1>
+        <p>Create memorable gathering spaces with our exquisite dining furniture collections</p>
+    </header>
+
+    <section class="dining-rooms-gallery">
+        <h2 class="gallery-title">Gathering Spaces</h2>
+        <p class="gallery-description">
+            Discover our artfully designed dining furniture collections that blend sophisticated style with practical functionality. Each dining set is crafted to create the perfect ambiance for everything from casual family meals to elegant dinner parties, making every gathering special.
+        </p>
+        
+        <div class="filter-container">
+            <button class="filter-btn active">All Collections</button>
+            <button class="filter-btn">Contemporary</button>
+            <button class="filter-btn">Traditional</button>
+            <button class="filter-btn">Artisanal</button>
+            <button class="filter-btn">Urban</button>
+            <button class="filter-btn">Premium</button>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item" style="--item-index: 1">
+                <span class="gallery-item-tag">Contemporary</span>
+                <img src="dining 1.jpg" alt="Contemporary Dining Set">
+                <div class="gallery-item-preview">
+                    <h3>Sleek Dining Ensemble</h3>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="overlay-content">
+                        <h3>Sleek Dining Ensemble</h3>
+                        <p>Our signature contemporary dining set features clean lines and minimalist design, with a spacious table and comfortable chairs ideal for modern entertaining.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="gallery-item" style="--item-index: 2">
+                <span class="gallery-item-tag">Traditional</span>
+                <img src="dining 2.jpg" alt="Traditional Dining Suite">
+                <div class="gallery-item-preview">
+                    <h3>Heritage Dining Collection</h3>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="overlay-content">
+                        <h3>Heritage Dining Collection</h3>
+                        <p>A timeless dining set featuring intricate craftsmanship, with an elegant dining table, matching chairs, and a sideboard for sophisticated dining experiences.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="gallery-item" style="--item-index: 8">
+                <span class="gallery-item-tag">Urban</span>
+                <img src="dining 9.jpg" alt="Loft Dining Experience">
+                <div class="gallery-item-preview">
+                    <h3>Loft Dining Collection</h3>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="overlay-content">
+                        <h3>Loft Dining Collection</h3>
+                        <p>Contemporary urban dining furniture featuring raw materials, functional design, and versatile seating options perfect for modern open-concept spaces.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item" style="--item-index: 3">
+                <span class="gallery-item-tag">Artisanal</span>
+                <img src="dining 3.jpg" alt="Farmhouse Dining Set">
+                <div class="gallery-item-preview">
+                    <h3>Farmhouse Dining Experience</h3>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="overlay-content">
+                        <h3>Farmhouse Dining Experience</h3>
+                        <p>Our handcrafted dining collection showcases natural wood grain with a solid table, bench seating, and chairs designed for comfortable family meals and gatherings.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" style="--item-index: 4">
+                <span class="gallery-item-tag">Urban</span>
+                <img src="dining 4.jpg" alt="Industrial Dining Space">
+                <div class="gallery-item-preview">
+                    <h3>Metropolitan Dining Suite</h3>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="overlay-content">
+                        <h3>Metropolitan Dining Suite</h3>
+                        <p>Striking combination of metal frames and wood surfaces creates a distinctive dining set with an urban edge, perfect for modern apartment living.</p>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <div class="gallery-item" style="--item-index: 5">
+                <span class="gallery-item-tag">Premium</span>
+                <img src="dining 5.jpg" alt="Luxury Dining Suite">
+                <div class="gallery-item-preview">
+                    <h3>Executive Dining Collection</h3>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="overlay-content">
+                        <h3>Executive Dining Collection</h3>
+                        <p>Our premium dining ensemble features an extended table with luxurious seating, elegant buffet, and display cabinet crafted from the finest materials for sophisticated entertaining.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" style="--item-index: 6">
+                <span class="gallery-item-tag">Contemporary</span>
+                <img src="dining 6.jpg" alt="Minimalist Dining Setting">
+                <div class="gallery-item-preview">
+                    <h3>Essential Dining Set</h3>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="overlay-content">
+                        <h3>Essential Dining Set</h3>
+                        <p>Our streamlined dining collection pairs a sculptural table with perfectly proportioned chairs for an elegant yet understated dining experience in compact spaces.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" style="--item-index: 7">
+                <span class="gallery-item-tag">Traditional</span>
+                <img src="dining 7.jpg" alt="Classic Grand Dining">
+                <div class="gallery-item-preview">
+                    <h3>Grand Dining Ensemble</h3>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="overlay-content">
+                        <h3>Grand Dining Ensemble</h3>
+                        <p>An impressive traditional dining set featuring an extendable table, upholstered chairs, and coordinating china cabinet with refined details for formal entertaining.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" style="--item-index: 8">
+                <span class="gallery-item-tag">Urban</span>
+                <img src="dining 8.jpg" alt="Loft Dining Experience">
+                <div class="gallery-item-preview">
+                    <h3>Loft Dining Collection</h3>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="overlay-content">
+                        <h3>Loft Dining Collection</h3>
+                        <p>Contemporary urban dining furniture featuring raw materials, functional design, and versatile seating options perfect for modern open-concept spaces.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+ 
+</section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <span>Relax</span> Furniture
+                </div>
+                <p>Create extraordinary dining experiences with our thoughtfully designed furniture collections for every style and space.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/1B7jztSenD/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/relaxfurniturelb?igsh=MmRnMnI1bGxwYnF6" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/96176661277" target="_blank"><i class="fab fa-whatsapp"></i></a>   
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#collections">Collections</a></li>
+                    <li><a href="../index.html#about">About Us</a></li>
+                    <li><a href="../index.html#design-services">Services</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column"> <h3>Collections</h3> <ul> <li><a href="../living room/living-rooms.html">Living Rooms</a></li> <li><a href="../bedrooms/bedrooms.html">Bedrooms</a></li> <li><a href="../dining room/dining.html">Dining Rooms</a></li> <li><a href="../curtains/curtains.html">Curtains</a></li> <li><a href="../office furniture/office.html">Office Furniture</a></li> </ul> </div>
+            <div class="footer-column">
+                <h3>Visit Our Office</h3>
+                <p class="location">
+                    <a href="https://maps.google.com/?q=33.885876,35.518501" target="_blank">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>El Achrafiyeh, Beyrouth, Lebanon</span>
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1rem;">
+            <p style="color: rgba(255,255,255,0.5);">&copy; 2025 Relax Furniture. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter functionality
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Reset active state
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.textContent;
+                    
+                    // If "All Collections" is selected, show all items
+                    if (filter === 'All Collections') {
+                        galleryItems.forEach(item => {
+                            item.style.display = 'block';
+                            // Reset animation
+                            item.style.animation = 'none';
+                            item.offsetHeight; // Trigger reflow
+                            item.style.animation = 'fadeInUp 0.8s forwards';
+                        });
+                        return;
+                    }
+                    
+                    // Otherwise, filter items
+                    galleryItems.forEach(item => {
+                        const tag = item.querySelector('.gallery-item-tag').textContent;
+                        
+                        if (tag === filter) {
+                            item.style.display = 'block';
+                            // Reset animation
+                            item.style.animation = 'none';
+                            item.offsetHeight; // Trigger reflow
+                            item.style.animation = 'fadeInUp 0.8s forwards';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Add parallax effect to header
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.page-header');
+                const scrolled = window.scrollY;
+                
+                if (header) {
+                    header.style.backgroundPositionY = -(scrolled * 0.3) + 'px';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
